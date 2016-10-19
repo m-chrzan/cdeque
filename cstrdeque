@@ -8,11 +8,11 @@ namespace jnp1 {
 
     size_t strdeque_size(unsigned long id);
 
-    void strdeque_insert_at(unsigned long id, size_t pos, const char* value);
+    void strdeque_insert_at(unsigned long id, size_t pos, const char *value);
 
     void strdeque_remove_at(unsigned long id, size_t pos);
 
-    const char* strdeque_get_at(unsigned long id, size_t pos);
+    const char *strdeque_get_at(unsigned long id, size_t pos);
 
     void strdeque_clear(unsigned long id);
 
