@@ -1,1 +1,4 @@
 *.o
+strdeque_test1
+strdeque_test2a
+strdeque_test2b
