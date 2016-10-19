@@ -1,6 +1,8 @@
 #ifndef STRDEQUECONST_H
 #define STRDEQUECONST_H
 
-unsigned long emptystrdeque();
+extern "C" {
+    unsigned long emptystrdeque();
+}
 
 #endif
