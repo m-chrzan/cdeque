@@ -1,13 +1,15 @@
-#include <cstring>
-#include <map>
-#include <deque>
 #include <algorithm>
+#include <cstring>
+#include <deque>
+#include <map>
 #include "strdeque.h"
 
-typedef std::deque<std::string> dequeString;
-const unsigned long maxLength = 1000000000;
-std::map< unsigned long , dequeString> deques;
-unsigned long nextId = 0;
+namespace {
+    typedef std::deque<std::string> dequeString;
+    const unsigned long maxLength = 1000000000;
+    std::map<unsigned long, dequeString> deques;
+    unsigned long nextId = 0;
+}
 
 unsigned long strdeque_new() {
 	dequeString d;
@@ -15,13 +17,13 @@ unsigned long strdeque_new() {
     return nextId++;
 }
 
-void strdeque_delete(unsigned long id){
+void strdeque_delete(unsigned long id) {
 	auto it = deques.find(id);
 	if (it != deques.end())
 		deques.erase(it);
 }
 
-size_t strdeque_size(unsigned long id){
+size_t strdeque_size(unsigned long id) {
 	auto it = deques.find(id);
 	if (it != deques.end())
 		return deques[id].size();
@@ -67,18 +69,18 @@ int strdeque_comp(unsigned long id1, unsigned long id2) {
 		else
 			return -1;
 	} else {
-		if (second == deques.end())
+		if (second == deques.end()) {
 			return 1;
-		else {
+        } else {
 			size_t minSize = std::min(deques[id1].size(), deques[id2].size());
 			for (int i = 0; i < (int) minSize; i++) {
 				int result = deques[id1][i].compare(deques[id2][i]);
 				if (result != 0)
 					return result;
 			}
-			if (deques[id1].size() < deques[id2].size())
+			if (deques[id1].size() < deques[id2].size()) {
 				return 1;
-			else {
+            } else {
 				if (deques[id1].size() == deques[id2].size())
 					return 0;
 				return -1;
