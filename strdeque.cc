@@ -47,10 +47,8 @@ void strdeque_remove_at(unsigned long id, size_t pos) {
 
 const char *strdeque_get_at(unsigned long id, size_t pos) {
 	auto it = deques.find(id);
-	if (it != deques.end() && pos < deques[id].size()) {
-		std::string str = deques[id].at(pos);
-		return str.c_str();
-	}
+	if (it != deques.end() && pos < deques[id].size())
+		return deques[id][pos].c_str();
     return NULL;
 }
 
