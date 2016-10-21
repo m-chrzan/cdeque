@@ -25,6 +25,9 @@ strdeque_test2a: $(OBJS) strdeque_test2a.o
 strdeque_test2b: $(OBJS) strdeque_test2b.o
 	$(CXX) $(CXXFLAGS) -o strdeque_test2b $(OBJS) strdeque_test2b.o
 
+test2a_sif: $(OBJS) strdeque_test2a.o
+	$(CXX) $(CXXFLAGS) -o strdeque_test2a strdeque_test2a.o $(OBJS)
+
 NDEBUG_FLAG=-DNDEBUG
 
 .PHONY: clean
