@@ -2,7 +2,14 @@
 #include <cstring>
 #include <deque>
 #include <map>
+#include <iostream>
 #include "strdeque.h"
+
+#ifdef NDEBUG
+	const static bool debug = true;
+#else
+	const static bool debug = false;
+#endif
 
 namespace {
     typedef std::deque<std::string> dequeString;
@@ -13,25 +20,63 @@ namespace {
         return ans;
     }
 
-    unsigned long nextId = 0;
+    unsigned long nextId = 1;
+}
+
+std::string returnName (unsigned long id) {
+	std::string name = "";
+	if (id == 0)
+		name = "the Empty Deque";
+	else {
+		name = "deque ";
+		name += std::to_string(id);
+	}
+	//std::cerr << "return " << name << "\n";
+	return name;
 }
 
 unsigned long strdeque_new() {
+	if (debug) {
+		std::cerr << "strdeque_new()\n";
+		std::cerr << "strdeque_new: deque " << nextId << " created\n";
+	}
 	dequeString d;
 	deques()[nextId] = d;
     return nextId++;
 }
 
 void strdeque_delete(unsigned long id) {
-	auto it = deques().find(id);
-	if (it != deques().end())
-		deques().erase(it);
+	std::string name = returnName(id);
+	//std::cerr << name <<"\n\n";
+	if (debug) {
+		if (id == 0)
+			std::cerr << "strdeque_delete(" << name << ")\n";
+		else
+			std::cerr << "strdeque_delete(" << id << ")\n";
+		std::cerr << "strdeque_delete: ";
+	}	
+	
+	if (id == 0) {
+		if (debug)
+			std::cerr << "attempt to remove " << name << "\n";
+	}
+	else {
+		auto it = deques().find(id);
+		if (it != deques().end()) {
+			if (debug)
+					std::cerr << name << " deleted\n";
+			deques().erase(it);
+		} else
+			if (debug)
+					std::cerr << name << " does not exist\n";
+	}
+
 }
 
 size_t strdeque_size(unsigned long id) {
 	auto it = deques().find(id);
 	if (it != deques().end())
-		return deques()[id].size();
+		return it->second.size();
 	return (size_t) 0;
 }
 
@@ -39,30 +84,30 @@ void strdeque_insert_at(unsigned long id, size_t pos, const char *value) {
 	auto it = deques().find(id);
 	if (it != deques().end() && value != NULL) {
 		std::string s = std::string(value, 0, maxLength);
-		if (pos >= deques()[id].size())
-			deques()[id].push_back(s);
+		if (pos >= it->second.size())
+			it->second.push_back(s);
 		else
-			deques()[id].insert(deques()[id].begin() + pos, s);
+			it->second.insert(it->second.begin() + pos, s);
 	}
 }
 
 void strdeque_remove_at(unsigned long id, size_t pos) {
 	auto it = deques().find(id);
-	if (it != deques().end() && pos < deques()[id].size())
-		deques()[id].erase(deques()[id].begin() + pos);
+	if (it != deques().end() && pos < it->second.size())
+		it->second.erase(it->second.begin() + pos);
 }
 
 const char *strdeque_get_at(unsigned long id, size_t pos) {
 	auto it = deques().find(id);
-	if (it != deques().end() && pos < deques()[id].size())
-		return deques()[id][pos].c_str();
+	if (it != deques().end() && pos < it->second.size())
+		return it->second[pos].c_str();
     return NULL;
 }
 
 void strdeque_clear(unsigned long id) {
 	auto it = deques().find(id);
 	if (it != deques().end())
-		deques()[id].clear();
+		it->second.clear();
 }
 
 int strdeque_comp(unsigned long id1, unsigned long id2) {
