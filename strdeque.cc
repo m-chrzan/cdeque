@@ -5,7 +5,7 @@
 #include <iostream>
 #include "strdeque.h"
 
-#ifdef NDEBUG
+#ifndef NDEBUG
 	const static bool debug = true;
 #else
 	const static bool debug = false;
