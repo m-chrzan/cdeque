@@ -27,18 +27,24 @@ std::string returnName (unsigned long id) {
 	std::string name = "";
 	if (id == 0)
 		name = "the Empty Deque";
-	else {
-		name = "deque ";
-		name += std::to_string(id);
-	}
-	//std::cerr << "return " << name << "\n";
+	else
+		name = std::to_string(id);
 	return name;
 }
 
+void printDebugMessage(std::string &funcName, std::string &message) {
+	std::cerr << funcName << ": " << message << '\n';
+}
+
+void printEntryMessage(const std::string &funcName, const std::string &dequeName) {
+	std::cerr << funcName << "(" << dequeName << ")\n";
+}
 unsigned long strdeque_new() {
+	std::string functionName = "strdeque_new";
 	if (debug) {
-		std::cerr << "strdeque_new()\n";
-		std::cerr << "strdeque_new: deque " << nextId << " created\n";
+		printEntryMessage(functionName, "");
+		std::string message = "deque " + std::to_string(nextId) + " created";
+		printDebugMessage(functionName, message);
 	}
 	dequeString d;
 	deques()[nextId] = d;
@@ -47,37 +53,49 @@ unsigned long strdeque_new() {
 
 void strdeque_delete(unsigned long id) {
 	std::string name = returnName(id);
-	//std::cerr << name <<"\n\n";
+	std::string debugMessage = "";
+	std::string functionName = "strdeque_delete";
 	if (debug) {
-		if (id == 0)
-			std::cerr << "strdeque_delete(" << name << ")\n";
-		else
-			std::cerr << "strdeque_delete(" << id << ")\n";
-		std::cerr << "strdeque_delete: ";
+		printEntryMessage(functionName, name);
 	}	
 	
 	if (id == 0) {
-		if (debug)
-			std::cerr << "attempt to remove " << name << "\n";
+		debugMessage += "attempt to remove " + name;
 	}
 	else {
+		name = "deque " + name;
 		auto it = deques().find(id);
 		if (it != deques().end()) {
-			if (debug)
-					std::cerr << name << " deleted\n";
+			debugMessage += name + " deleted";
 			deques().erase(it);
 		} else
-			if (debug)
-					std::cerr << name << " does not exist\n";
+			debugMessage += name + " does not exist";
 	}
-
+	if (debug)
+		printDebugMessage(functionName, debugMessage);
 }
 
 size_t strdeque_size(unsigned long id) {
-	auto it = deques().find(id);
-	if (it != deques().end())
-		return it->second.size();
-	return (size_t) 0;
+	std::string name = returnName(id);
+	std::string functionName = "strdeque_size";
+	std::string message = "";
+	size_t size = 0;
+	if (debug)
+		printEntryMessage(functionName, name);
+	if (id == 0)
+		message = name + " contains " + std::to_string(size) + " elements";
+	else {
+		auto it = deques().find(id);
+		name = "deque " + name;
+		if (it != deques().end()) {
+			size = it->second.size();
+			message = name + " contains " + std::to_string(size) + " elements ";
+		} else
+			message = name + " does not exist ";
+	}
+	if (debug)
+		printDebugMessage(functionName, message);
+	return size;
 }
 
 void strdeque_insert_at(unsigned long id, size_t pos, const char *value) {
@@ -105,9 +123,26 @@ const char *strdeque_get_at(unsigned long id, size_t pos) {
 }
 
 void strdeque_clear(unsigned long id) {
-	auto it = deques().find(id);
-	if (it != deques().end())
-		it->second.clear();
+	std::string functionName = "strdeque_clear";
+	std::string name = returnName(id);
+	std::string message = "";
+	
+	if (debug)
+		printEntryMessage(functionName, name);
+		
+	if (id == 0)
+		message = "attempt to clear " + name;
+	else {
+		name = "deque " + name;
+		auto it = deques().find(id);
+		if (it != deques().end()) {
+			message = name + " cleared";
+			it->second.clear();
+		} else
+			message = name + " does not exist";
+	}
+	if (debug)
+		printDebugMessage(functionName, message);
 }
 
 int strdeque_comp(unsigned long id1, unsigned long id2) {
