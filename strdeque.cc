@@ -21,6 +21,13 @@ namespace {
     }
 
     unsigned long nextId = 1;
+
+    std::ostream& cerr() {
+        static std::ios_base::Init i = std::ios_base::Init();
+        //static const std::ostream err = std::cerr;
+
+        return std::cerr;
+    }
 }
 
 std::string returnName (unsigned long id) {
@@ -33,11 +40,11 @@ std::string returnName (unsigned long id) {
 }
 
 void printDebugMessage(std::string &funcName, std::string &message) {
-	std::cerr << funcName << ": " << message << '\n';
+	cerr() << funcName << ": " << message << '\n';
 }
 
 void printEntryMessage(const std::string &funcName, const std::string &dequeName) {
-	std::cerr << funcName << "(" << dequeName << ")\n";
+	cerr() << funcName << "(" << dequeName << ")\n";
 }
 unsigned long strdeque_new() {
 	std::string functionName = "strdeque_new";
