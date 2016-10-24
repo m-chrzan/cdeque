@@ -181,34 +181,29 @@ void strdeque_clear(unsigned long id) {
 }
 
 int strdeque_comp(unsigned long id1, unsigned long id2) {
-    auto first = deques().find(id1);
-    auto second = deques().find(id2);
+    auto it1 = deques().find(id1);
+    auto it2 = deques().find(id2);
 
-    if (first == deques().end()) {
-        if (second == deques().end()) {
-            return 0;
-        } else {
-            return -1;
-        }
+    dequeString deque1;
+    dequeString deque2;
+
+    if (it1 == deques().end()) {
+        deque1 = deques()[0];
     } else {
-        if (second == deques().end()) {
-            return 1;
-        } else {
-            size_t minSize = std::min(deques()[id1].size(), deques()[id2].size());
-            for (int i = 0; i < (int) minSize; i++) {
-                int result = deques()[id1][i].compare(deques()[id2][i]);
-                if (result != 0) {
-                    return result;
-                }
-            }
-            if (deques()[id1].size() < deques()[id2].size()) {
-                return 1;
-            } else {
-                if (deques()[id1].size() == deques()[id2].size()) {
-                    return 0;
-                }
-                return -1;
-            }
-        }
+        deque1 = it1->second;
+    }
+
+    if (it2 == deques().end()) {
+        deque2 = deques()[0];
+    }  else {
+        deque2 = it2->second;
+    }
+
+    if (deque1 < deque2) {
+        return -1;
+    } else if (deque1 == deque2) {
+        return 0;
+    } else {
+        return 1;
     }
 }
