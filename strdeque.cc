@@ -17,6 +17,9 @@ namespace {
 
     std::map<unsigned long, dequeString>& deques() {
         static std::map<unsigned long, dequeString> ans;
+
+        ans[0] = dequeString();
+
         return ans;
     }
 
