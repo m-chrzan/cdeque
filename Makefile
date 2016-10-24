@@ -20,13 +20,10 @@ strdeque_test1: $(OBJS) strdeque_test1.o
 	$(CXX) $(CXXFLAGS) -o strdeque_test1 $(OBJS) strdeque_test1.o
 
 strdeque_test2a: $(OBJS) strdeque_test2a.o
-	$(CXX) $(CXXFLAGS) -o strdeque_test2a $(OBJS) strdeque_test2a.o
+	$(CXX) $(CXXFLAGS) -o strdeque_test2a strdeque_test2a.o $(OBJS)
 
 strdeque_test2b: $(OBJS) strdeque_test2b.o
-	$(CXX) $(CXXFLAGS) -o strdeque_test2b $(OBJS) strdeque_test2b.o
-
-test2a_sif: $(OBJS) strdeque_test2a.o
-	$(CXX) $(CXXFLAGS) -o strdeque_test2a strdeque_test2a.o $(OBJS)
+	$(CXX) $(CXXFLAGS) -o strdeque_test2b strdeque_test2b.o $(OBJS)
 
 NDEBUG_FLAG=-DNDEBUG
 
