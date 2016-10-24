@@ -1,7 +1,9 @@
 #ifndef STRDEQUE_H
 #define STRDEQUE_H
 
+#ifdef __cplusplus
 extern "C" {
+#endif
     unsigned long strdeque_new();
 
     void strdeque_delete(unsigned long id);
@@ -17,6 +19,8 @@ extern "C" {
     void strdeque_clear(unsigned long id);
 
     int strdeque_comp(unsigned long id1, unsigned long id2);
+#ifdef __cplusplus
 }
+#endif
 
 #endif
