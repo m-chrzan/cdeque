@@ -2,9 +2,9 @@
 #include "strdequeconst.h"
 
 #ifndef NDEBUG
-	const static bool debug = true;
+    const static bool debug = true;
 #else
-	const static bool debug = false;
+    const static bool debug = false;
 #endif
 
 
