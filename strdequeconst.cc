@@ -1,12 +1,14 @@
 #include <iostream>
+
 #include "strdequeconst.h"
 
+namespace {
 #ifndef NDEBUG
-    const static bool debug = true;
+    const bool debug = true;
 #else
-    const static bool debug = false;
+    const bool debug = false;
 #endif
-
+}
 
 unsigned long emptystrdeque() {
     if (debug) {

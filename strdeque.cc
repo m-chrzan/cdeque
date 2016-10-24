@@ -3,15 +3,16 @@
 #include <deque>
 #include <map>
 #include <iostream>
+
 #include "strdeque.h"
 
+namespace {
 #ifndef NDEBUG
-    const static bool debug = true;
+    const bool debug = true;
 #else
-    const static bool debug = false;
+    const bool debug = false;
 #endif
 
-namespace {
     typedef std::deque<std::string> dequeString;
     const unsigned long maxLength = 1000000000;
 
