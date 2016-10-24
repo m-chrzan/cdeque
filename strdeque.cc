@@ -136,10 +136,36 @@ void strdeque_insert_at(unsigned long id, size_t pos, const char *value) {
 }
 
 void strdeque_remove_at(unsigned long id, size_t pos) {
-    auto it = deques().find(id);
-    if (it != deques().end() && pos < it->second.size()) {
-        it->second.erase(it->second.begin() + pos);
-    }
+	std::string functionName = "strdeque_remove_at";
+	std::string name = returnName(id);
+	std::string message = "";
+	
+	if (debug) {
+		printEntryMessage(functionName, name);
+	}
+	
+	if (id == 0) {
+		message = "attempt to remove from " + name;
+	} else {
+		name = "deque " + name;
+		auto it = deques().find(id);
+		if (it != deques().end()) {
+			if (pos < it->second.size()) {
+				message = name + ", element at "
+				               + std::to_string(pos) + " removed";
+				it->second.erase(it->second.begin() + pos);
+			} else {
+				message = name + " does not contain element at "
+				               + std::to_string(pos);
+			}
+		} else {
+			message = name + " does not exist";
+		}
+	}
+	
+	if (debug) {
+		printDebugMessage(functionName, message);
+	}
 }
 
 const char *strdeque_get_at(unsigned long id, size_t pos) {
@@ -172,6 +198,7 @@ void strdeque_clear(unsigned long id) {
             message = name + " does not exist";
         }
     }
+    
     if (debug) {
         printDebugMessage(functionName, message);
     }
