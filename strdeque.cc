@@ -24,7 +24,6 @@ namespace {
 
     std::ostream& cerr() {
         static std::ios_base::Init i = std::ios_base::Init();
-        //static const std::ostream err = std::cerr;
 
         return std::cerr;
     }
