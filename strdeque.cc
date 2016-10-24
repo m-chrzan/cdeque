@@ -25,12 +25,6 @@ namespace {
 
     unsigned long nextId = 1;
 
-    std::ostream& cerr() {
-        static std::ios_base::Init i = std::ios_base::Init();
-
-        return std::cerr;
-    }
-
     std::string returnName (unsigned long id) {
         std::string name = "";
 
@@ -44,11 +38,11 @@ namespace {
     }
 
     void printDebugMessage(std::string &funcName, std::string &message) {
-        cerr() << funcName << ": " << message << '\n';
+        std::cerr << funcName << ": " << message << '\n';
     }
 
     void printEntryMessage(const std::string &funcName, const std::string &dequeName) {
-        cerr() << funcName << "(" << dequeName << ")\n";
+        std::cerr << funcName << "(" << dequeName << ")\n";
     }
 }
 

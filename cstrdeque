@@ -1,6 +1,8 @@
 #ifndef CSTRDEQUE
 #define CSTRDEQUE
 
+#include <iostream>
+
 namespace jnp1 {
     extern "C" {
         unsigned long strdeque_new();
