@@ -14,7 +14,6 @@ namespace {
 #endif
 
     typedef std::deque<std::string> dequeString;
-    const unsigned long maxLength = 1000000000;
 
     std::map<unsigned long, dequeString>& deques() {
         static std::map<unsigned long, dequeString> ans;
@@ -124,7 +123,7 @@ size_t strdeque_size(unsigned long id) {
 void strdeque_insert_at(unsigned long id, size_t pos, const char *value) {
     auto it = deques().find(id);
     if (it != deques().end() && value != NULL) {
-        std::string s = std::string(value, 0, maxLength);
+        std::string s = std::string(value);
 
         if (pos >= it->second.size()) {
             it->second.push_back(s);
