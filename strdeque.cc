@@ -37,23 +37,13 @@ namespace {
         return name;
     }
 
-<<<<<<< HEAD
-=======
-    void printDebugMessage(const std::string &funcName, std::string &message) {
-        std::cerr << funcName << ": " << message << '\n';
-    }
-
->>>>>>> fd436601c54427723de7f94bdd9c52f8dc86db39
     void printEntryMessage(const std::string &funcName, const std::string &dequeName) {
         std::cerr << funcName << "(" << dequeName << ")\n";
     }
 }
 
 unsigned long strdeque_new() {
-<<<<<<< HEAD
 	
-=======
->>>>>>> fd436601c54427723de7f94bdd9c52f8dc86db39
     if (debug) {
         printEntryMessage(__FUNCTION__, "");
         std::cerr << __FUNCTION__ << ": deque " + std::to_string(nextId) + " created\n";
@@ -66,7 +56,6 @@ unsigned long strdeque_new() {
 }
 
 void strdeque_delete(unsigned long id) {
-<<<<<<< HEAD
 
     if (debug) {
         printEntryMessage(__FUNCTION__, returnName(id));
@@ -76,20 +65,6 @@ void strdeque_delete(unsigned long id) {
     
      if (debug) {
 		std::string name = returnName(id);
-=======
-    if (debug) {
-        std::string name = returnName(id);
-        printEntryMessage(__FUNCTION__, name);
-    }    
-    
-    auto it = deques().find(id);
-    if (it != deques().end()) {
-        deques().erase(it);
-    }
-
-    if (debug) {
-        std::string name = returnName(id);
->>>>>>> fd436601c54427723de7f94bdd9c52f8dc86db39
 		std::cerr << __FUNCTION__ << ": ";
 		if (id == 0) {
 			std::cerr << "attempt to remove " << name << "\n";
@@ -192,7 +167,6 @@ void strdeque_insert_at(unsigned long id, size_t pos, const char *value) {
 }
 
 void strdeque_remove_at(unsigned long id, size_t pos) {
-<<<<<<< HEAD
 	
 	if (debug) {
 		std::cerr << __FUNCTION__ << "(" << returnName(id) << ", "
@@ -223,39 +197,6 @@ void strdeque_remove_at(unsigned long id, size_t pos) {
 	
 	if (it != deques().end() && pos < it->second.size()) {
 		it->second.erase(it->second.begin() + pos);
-=======
-	if (debug) {
-        std::string name = returnName(id);
-		printEntryMessage(__FUNCTION__, name);
-	}
-	
-    auto it = deques().find(id);
-
-    if (debug) {
-        std::string name = returnName(id);
-        std::string message = "";
-        if (id == 0) {
-            message = "Attempt to remove from emptydeque.";
-        } else {
-            if (it != deques().end()) {
-                if (pos < it->second.size()) {
-                    message = name + ", element at "
-                                   + std::to_string(pos) + " removed";
-                    it->second.erase(it->second.begin() + pos);
-                } else {
-                    message = name + " does not contain element at "
-                                   + std::to_string(pos);
-                }
-            } else {
-                message = name + " does not exist";
-            }
-        }
-		printDebugMessage(__FUNCTION__, message);
-    }
-
-	if (id != 0 && it != deques().end() && pos < it->second.size()) {
-				it->second.erase(it->second.begin() + pos);
->>>>>>> fd436601c54427723de7f94bdd9c52f8dc86db39
 	}
 	
 }
