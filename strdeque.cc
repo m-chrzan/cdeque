@@ -37,7 +37,7 @@ namespace {
         return name;
     }
 
-    void printDebugMessage(std::string &funcName, std::string &message) {
+    void printDebugMessage(const std::string &funcName, std::string &message) {
         std::cerr << funcName << ": " << message << '\n';
     }
 
@@ -47,8 +47,6 @@ namespace {
 }
 
 unsigned long strdeque_new() {
-    std::string functionName = "strdeque_new";
-
     if (debug) {
         printEntryMessage(__FUNCTION__, "");
         std::cerr << __FUNCTION__ << ": deque " + std::to_string(nextId) + " created\n";
@@ -61,10 +59,8 @@ unsigned long strdeque_new() {
 }
 
 void strdeque_delete(unsigned long id) {
-    std::string name = returnName(id);
-    std::string debugMessage = "";
-
     if (debug) {
+        std::string name = returnName(id);
         printEntryMessage(__FUNCTION__, name);
     }    
     
@@ -74,6 +70,7 @@ void strdeque_delete(unsigned long id) {
     }
 
     if (debug) {
+        std::string name = returnName(id);
 		std::cerr << __FUNCTION__ << ": ";
 		if (id == 0) {
 			std::cerr << "attempt to remove " << name << "\n";
