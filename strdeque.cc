@@ -130,34 +130,37 @@ void strdeque_insert_at(unsigned long id, size_t pos, const char *value) {
 }
 
 void strdeque_remove_at(unsigned long id, size_t pos) {
-	std::string functionName = "strdeque_remove_at";
-	std::string name = returnName(id);
-	std::string message = "";
-	
 	if (debug) {
-		printEntryMessage(functionName, name);
+        std::string name = returnName(id);
+		printEntryMessage(__FUNCTION__, name);
 	}
 	
-	if (id == 0) {
-		message = "attempt to remove from " + name;
-	} else {
-		auto it = deques().find(id);
-		if (it != deques().end()) {
-			if (pos < it->second.size()) {
-				message = name + ", element at "
-				               + std::to_string(pos) + " removed";
+    auto it = deques().find(id);
+
+    if (debug) {
+        std::string name = returnName(id);
+        std::string message = "";
+        if (id == 0) {
+            message = "Attempt to remove from emptydeque.";
+        } else {
+            if (it != deques().end()) {
+                if (pos < it->second.size()) {
+                    message = name + ", element at "
+                                   + std::to_string(pos) + " removed";
+                    it->second.erase(it->second.begin() + pos);
+                } else {
+                    message = name + " does not contain element at "
+                                   + std::to_string(pos);
+                }
+            } else {
+                message = name + " does not exist";
+            }
+        }
+		printDebugMessage(__FUNCTION__, message);
+    }
+
+	if (id != 0 && it != deques().end() && pos < it->second.size()) {
 				it->second.erase(it->second.begin() + pos);
-			} else {
-				message = name + " does not contain element at "
-				               + std::to_string(pos);
-			}
-		} else {
-			message = name + " does not exist";
-		}
-	}
-	
-	if (debug) {
-		printDebugMessage(functionName, message);
 	}
 }
 
