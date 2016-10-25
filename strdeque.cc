@@ -77,7 +77,7 @@ void strdeque_delete(unsigned long id) {
 		}
     }
     
-    if (it != deques().end()) {
+    if (id != 0 && it != deques().end()) {
         deques().erase(it);
     }
     
@@ -92,7 +92,7 @@ size_t strdeque_size(unsigned long id) {
 
     auto it = deques().find(id);
     
-    if (it != deques().end()) {
+    if (id != 0 && it != deques().end()) {
         size = it->second.size();
     }
 	
@@ -155,7 +155,7 @@ void strdeque_insert_at(unsigned long id, size_t pos, const char *value) {
 		}
 	}
 	
-    if (it != deques().end() && value != NULL) {
+    if (id != 0 && it != deques().end() && value != NULL) {
         std::string s = std::string(value);
 
         if (pos >= it->second.size()) {
@@ -195,7 +195,7 @@ void strdeque_remove_at(unsigned long id, size_t pos) {
 		}
 	}
 	
-	if (it != deques().end() && pos < it->second.size()) {
+	if (id != 0 && it != deques().end() && pos < it->second.size()) {
 		it->second.erase(it->second.begin() + pos);
 	}
 	
@@ -230,7 +230,7 @@ const char *strdeque_get_at(unsigned long id, size_t pos) {
 		}
 	}
 	
-    if (it != deques().end() && pos < it->second.size()) {
+    if (id != 0 && it != deques().end() && pos < it->second.size()) {
         return it->second[pos].c_str();
     }
 
@@ -260,7 +260,7 @@ void strdeque_clear(unsigned long id) {
 		}
     }
     
-    if (it != deques().end()) {
+    if (id != 0 && it != deques().end()) {
         it->second.clear();
     }
   
