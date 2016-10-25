@@ -31,7 +31,7 @@ namespace {
         if (id == 0) {
             name = "the Empty Deque";
         } else {
-            name = std::to_string(id);
+            name = "deque " + std::to_string(id);
         }
 
         return name;
@@ -50,9 +50,8 @@ unsigned long strdeque_new() {
     std::string functionName = "strdeque_new";
 
     if (debug) {
-        printEntryMessage(functionName, "");
-        std::string message = "deque " + std::to_string(nextId) + " created";
-        printDebugMessage(functionName, message);
+        printEntryMessage(__FUNCTION__, "");
+        std::cerr << __FUNCTION__ << ": deque " + std::to_string(nextId) + " created\n";
     }
 
     dequeString d;
@@ -64,28 +63,28 @@ unsigned long strdeque_new() {
 void strdeque_delete(unsigned long id) {
     std::string name = returnName(id);
     std::string debugMessage = "";
-    std::string functionName = "strdeque_delete";
 
     if (debug) {
-        printEntryMessage(functionName, name);
+        printEntryMessage(__FUNCTION__, name);
     }    
     
-    if (id == 0) {
-        debugMessage += "attempt to remove " + name;
-    } else {
-        name = "deque " + name;
-
-        auto it = deques().find(id);
-        if (it != deques().end()) {
-            debugMessage += name + " deleted";
-            deques().erase(it);
-        } else {
-            debugMessage += name + " does not exist";
-        }
+    auto it = deques().find(id);
+    if (it != deques().end()) {
+        deques().erase(it);
     }
 
     if (debug) {
-        printDebugMessage(functionName, debugMessage);
+		std::cerr << __FUNCTION__ << ": ";
+		if (id == 0) {
+			std::cerr << "attempt to remove " << name << "\n";
+		} else {
+			auto it = deques().find(id);
+			if (it != deques().end()) {
+				std::cerr << name << " deleted\n";
+			} else {
+				std::cerr << name << " does not exist\n";
+			}
+		}
     }
 }
 
@@ -145,7 +144,6 @@ void strdeque_remove_at(unsigned long id, size_t pos) {
 	if (id == 0) {
 		message = "attempt to remove from " + name;
 	} else {
-		name = "deque " + name;
 		auto it = deques().find(id);
 		if (it != deques().end()) {
 			if (pos < it->second.size()) {
