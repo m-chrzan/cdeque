@@ -1,5 +1,4 @@
 #include <iostream>
-
 #include "strdequeconst.h"
 
 namespace {
@@ -12,9 +11,8 @@ namespace {
 
 unsigned long emptystrdeque() {
     if (debug) {
-        std::cerr << "emptystrdeque()" << std::endl;
+        std::cerr << "emptystrdeque()\n";
     }
 
-    static unsigned long id = 0;
-    return id;
+    return 0;
 }
