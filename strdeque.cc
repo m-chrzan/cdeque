@@ -1,10 +1,10 @@
 #include <algorithm>
+#include <assert.h>
 #include <cstring>
 #include <deque>
-#include <map>
 #include <iostream>
 #include <limits.h>
-#include <assert.h>
+#include <map>
 #include "strdeque.h"
 
 namespace {
@@ -42,10 +42,10 @@ namespace {
 }
 
 unsigned long strdeque_new() {
-	
-	static unsigned long nextId = 1;
-	assert (nextId != ULONG_MAX);
-	
+    static unsigned long nextId = 1;
+
+    assert (nextId != ULONG_MAX);
+
     if (debug) {
         printEntryMessage(__FUNCTION__, "");
         std::cerr << __FUNCTION__ << ": deque " << nextId << " created\n";
@@ -67,6 +67,7 @@ void strdeque_delete(unsigned long id) {
     if (debug) {
         std::string name = returnName(id);
         std::cerr << __FUNCTION__ << ": ";
+
         if (id == 0) {
             std::cerr << "attempt to remove " << name << "\n";
         } else {
@@ -175,6 +176,7 @@ void strdeque_remove_at(unsigned long id, size_t pos) {
     if (debug) {
         std::string name = returnName(id);
         std::cerr << __FUNCTION__ << ": ";
+
         if (id == 0) {
             std::cerr << "attempt to remove from " << name << "\n";
         } else {
@@ -241,6 +243,7 @@ void strdeque_clear(unsigned long id) {
 
     if (debug) {
         std::cerr << __FUNCTION__ << ": ";
+
         if (id == 0) {
             std::cerr << "attempt to clear " << returnName(id) << "\n";
         } else {
@@ -295,6 +298,7 @@ int strdeque_comp(unsigned long id1, unsigned long id2) {
         std::cerr << __FUNCTION__ << ": ";
         std::string name1 = returnName(id1);
         std::string name2 = returnName(id2);
+
         if (it1 == deques().end()) {
             std::cerr << name1 << " does not exist\n";
         } else {
