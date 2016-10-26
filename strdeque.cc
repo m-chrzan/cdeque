@@ -1,9 +1,9 @@
 #include <algorithm>
-#include <assert.h>
+#include <cassert>
+#include <climits>
 #include <cstring>
 #include <deque>
 #include <iostream>
-#include <limits.h>
 #include <map>
 #include "strdeque.h"
 
