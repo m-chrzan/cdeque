@@ -231,10 +231,8 @@ const char *strdeque_get_at(unsigned long id, size_t pos) {
 }
 
 void strdeque_clear(unsigned long id) {
-    std::string name = returnName(id);
-
     if (debug) {
-        printEntryMessage(__FUNCTION__, name);
+        printEntryMessage(__FUNCTION__, returnName(id));
     }
 
     auto it = deques().find(id);
@@ -242,12 +240,12 @@ void strdeque_clear(unsigned long id) {
     if (debug) {
         std::cerr << __FUNCTION__ << ": ";
         if (id == 0) {
-            std::cerr << "attempt to clear " << name << "\n";
+            std::cerr << "attempt to clear " << returnName(id) << "\n";
         } else {
             if (it != deques().end()) {
-                std::cerr << name << " cleared\n";
+                std::cerr << returnName(id) << " cleared\n";
             } else {
-                std::cerr << name << " does not exist\n";
+                std::cerr << returnName(id) << " does not exist\n";
             }
         }
     }
