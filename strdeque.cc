@@ -4,7 +4,7 @@
 #include <cstring>
 #include <deque>
 #include <iostream>
-#include <map>
+#include <unordered_map>
 #include "strdeque.h"
 
 namespace {
@@ -16,14 +16,11 @@ namespace {
 
     typedef std::deque<std::string> dequeString;
 
-    unsigned long nextId = 0;
+    std::unordered_map<unsigned long, dequeString>& deques() {
+        static std::unordered_map<unsigned long, dequeString> ans;
 
-    std::map<unsigned long, dequeString>& deques() {
-        static std::map<unsigned long, dequeString> ans;
-
-        if (nextId == 0) {
+        if (ans.find(0) == ans.end()) {
             ans[0] = dequeString();
-            nextId++;
         }
 
         return ans;
@@ -47,6 +44,8 @@ namespace {
 }
 
 unsigned long strdeque_new() {
+    static unsigned long nextId = 1;
+
     if (debug) {
         assert (nextId != ULONG_MAX);
         printEntryMessage(__FUNCTION__, "");
