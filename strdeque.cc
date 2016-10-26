@@ -99,15 +99,12 @@ size_t strdeque_size(unsigned long id) {
 	if (debug) {
 		std::string name = returnName(id);
 		std::cerr << __FUNCTION__ << ": ";
-		if (id == 0) {
-			std::cerr << name << " contains " << size << " elements\n";
-		} else {
-			if (it != deques().end()) {
-				std::cerr << name << " contains " << size << " elements\n";
-			} else {
-				std::cerr << name << " does not exist\n";
-			}
-		}
+
+        if (it != deques().end()) {
+            std::cerr << name << " contains " << size << " elements\n";
+        } else {
+            std::cerr << name << " does not exist\n";
+        }
     }
     
     return size;
