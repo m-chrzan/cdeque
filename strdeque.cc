@@ -63,7 +63,7 @@ void strdeque_delete(unsigned long id) {
     
     auto it = deques().find(id);
     
-     if (debug) {
+    if (debug) {
 		std::string name = returnName(id);
 		std::cerr << __FUNCTION__ << ": ";
 		if (id == 0) {
@@ -114,14 +114,16 @@ size_t strdeque_size(unsigned long id) {
 }
 
 void strdeque_insert_at(unsigned long id, size_t pos, const char *value) {
-	
 	if (debug) {
 		std::cerr << __FUNCTION__ << "(" << returnName(id) << ", "
 		          << pos << ", ";
-		if (value == NULL)
+
+		if (value == NULL) {
 			std::cerr << "NULL";
-		else
+        } else {
 			std::cerr << "\"" << value << "\"";
+        }
+
 		std::cerr << ")\n";
 	}
 	
@@ -130,6 +132,7 @@ void strdeque_insert_at(unsigned long id, size_t pos, const char *value) {
     if (debug) {
 		std::string name = returnName(id);
 		std::cerr << __FUNCTION__ << ": ";
+
 		if (id == 0) {
 			std::cerr << "attempt to insert to " << name << "\n";
 		} else {
@@ -165,7 +168,6 @@ void strdeque_insert_at(unsigned long id, size_t pos, const char *value) {
 }
 
 void strdeque_remove_at(unsigned long id, size_t pos) {
-	
 	if (debug) {
 		std::cerr << __FUNCTION__ << "(" << returnName(id) << ", "
 		          << pos << ")\n";
@@ -199,16 +201,17 @@ void strdeque_remove_at(unsigned long id, size_t pos) {
 }
 
 const char *strdeque_get_at(unsigned long id, size_t pos) {
-	
 	if (debug) {
 		std::cerr << __FUNCTION__ << "(" << returnName(id) << ", "
 		          << pos << ")\n";
 	}
+
     auto it = deques().find(id);
     
     if (debug) {
 		std::string name = returnName(id);
 		std::cerr << __FUNCTION__ << ": ";
+
 		if (id == 0) {
 			std::cerr << "attempt to get from " << name << "\n";
 		} else {
@@ -242,12 +245,11 @@ void strdeque_clear(unsigned long id) {
         
     auto it = deques().find(id);
     
-     if (debug) {
+    if (debug) {
 		std::cerr << __FUNCTION__ << ": ";
         if (id == 0) {
 			std::cerr << "attempt to clear " << name << "\n";
-		}
-		else {
+		} else {
 			if (it != deques().end()) {
 				std::cerr << name << " cleared\n";
 			} else {
@@ -259,15 +261,14 @@ void strdeque_clear(unsigned long id) {
     if (it != deques().end()) {
         it->second.clear();
     }
-  
 }
 
 int strdeque_comp(unsigned long id1, unsigned long id2) {
-	
 	if (debug) {
 		std::cerr << __FUNCTION__ << "(" << returnName(id1) << ", "
 		          << returnName(id2) << ")\n";
 	}
+
     auto it1 = deques().find(id1);
     auto it2 = deques().find(id2);
 	
