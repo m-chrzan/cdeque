@@ -16,10 +16,15 @@ namespace {
 
     typedef std::deque<std::string> dequeString;
 
+    unsigned long nextId = 0;
+
     std::map<unsigned long, dequeString>& deques() {
         static std::map<unsigned long, dequeString> ans;
 
-        ans[0] = dequeString();
+        if (nextId == 0) {
+            ans[0] = dequeString();
+            nextId++;
+        }
 
         return ans;
     }
@@ -42,17 +47,17 @@ namespace {
 }
 
 unsigned long strdeque_new() {
-    static unsigned long nextId = 1;
-
-    assert (nextId != ULONG_MAX);
-
     if (debug) {
+        assert (nextId != ULONG_MAX);
         printEntryMessage(__FUNCTION__, "");
-        std::cerr << __FUNCTION__ << ": deque " << nextId << " created\n";
     }
 
     dequeString d;
     deques()[nextId] = d;
+
+    if (debug) {
+        std::cerr << __FUNCTION__ << ": deque " << nextId << " created\n";
+    }
 
     return nextId++;
 }
