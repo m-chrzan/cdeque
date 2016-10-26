@@ -3,7 +3,8 @@
 #include <deque>
 #include <map>
 #include <iostream>
-
+#include <limits.h>
+#include <assert.h>
 #include "strdeque.h"
 
 namespace {
@@ -23,8 +24,6 @@ namespace {
         return ans;
     }
 
-    unsigned long nextId = 1;
-
     std::string returnName (unsigned long id) {
         std::string name = "";
 
@@ -43,6 +42,10 @@ namespace {
 }
 
 unsigned long strdeque_new() {
+	
+	static unsigned long nextId = 1;
+	assert (nextId != ULONG_MAX);
+	
     if (debug) {
         printEntryMessage(__FUNCTION__, "");
         std::cerr << __FUNCTION__ << ": deque " << nextId << " created\n";
