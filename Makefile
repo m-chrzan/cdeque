@@ -27,6 +27,11 @@ strdeque_test2b: $(OBJS) strdeque_test2b.o
 
 NDEBUG_FLAG=-DNDEBUG
 
+ndebug:
+	$(CXX) $(CXXFLAGS) $(NDEBUG_FLAG) -c -o strdeque.o strdeque.cc
+	$(CXX) $(CXXFLAGS) $(NDEBUG_FLAG) -c -o strdequeconst.o strdequeconst.cc
+	make
+
 .PHONY: clean
 
 clean:
