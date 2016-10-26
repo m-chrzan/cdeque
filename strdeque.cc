@@ -46,7 +46,7 @@ unsigned long strdeque_new() {
 	
     if (debug) {
         printEntryMessage(__FUNCTION__, "");
-        std::cerr << __FUNCTION__ << ": deque " + std::to_string(nextId) + " created\n";
+        std::cerr << __FUNCTION__ << ": deque " << nextId << " created\n";
     }
 
     dequeString d;
@@ -100,12 +100,10 @@ size_t strdeque_size(unsigned long id) {
 		std::string name = returnName(id);
 		std::cerr << __FUNCTION__ << ": ";
 		if (id == 0) {
-			std::cerr << name << " contains " << std::to_string(size) 
-		              << " elements\n";
+			std::cerr << name << " contains " << size << " elements\n";
 		} else {
 			if (it != deques().end()) {
-				std::cerr << name << " contains " << std::to_string(size) 
-		              << " elements\n";
+				std::cerr << name << " contains " << size << " elements\n";
 			} else {
 				std::cerr << name << " does not exist\n";
 			}
@@ -119,11 +117,11 @@ void strdeque_insert_at(unsigned long id, size_t pos, const char *value) {
 	
 	if (debug) {
 		std::cerr << __FUNCTION__ << "(" << returnName(id) << ", "
-		          << std::to_string(pos) << ", ";
+		          << pos << ", ";
 		if (value == NULL)
 			std::cerr << "NULL";
 		else
-			std::cerr << "\"" << std::string(value) << "\"";
+			std::cerr << "\"" << value << "\"";
 		std::cerr << ")\n";
 	}
 	
@@ -141,12 +139,12 @@ void strdeque_insert_at(unsigned long id, size_t pos, const char *value) {
 				} else {
 					if (pos >= it->second.size()) {
 						std::cerr << name << ", element \""
-								  << std::string(value) << "\" inserted at "
-								  << std::to_string(it->second.size()) << "\n";
+								  << value << "\" inserted at "
+								  << it->second.size() << "\n";
 					} else {
 						std::cerr << name << ", element \""
-								  << std::string(value) << "\" inserted at "
-								  << std::to_string(pos) << "\n";
+								  << value << "\" inserted at "
+								  << pos << "\n";
 					}
 				}
 			} else {
@@ -170,7 +168,7 @@ void strdeque_remove_at(unsigned long id, size_t pos) {
 	
 	if (debug) {
 		std::cerr << __FUNCTION__ << "(" << returnName(id) << ", "
-		          << std::to_string(pos) << ")\n";
+		          << pos << ")\n";
 	}
 	
 	auto it = deques().find(id);
@@ -183,11 +181,10 @@ void strdeque_remove_at(unsigned long id, size_t pos) {
 		} else {
 			if (it != deques().end()) {
 				if (pos < it->second.size()) {
-					std::cerr << name << ", element at "
-					          << std::to_string(pos) << " removed\n";
+					std::cerr << name << ", element at " << pos << " removed\n";
 				} else {
 					std::cerr << name << " does not contain element at "
-					          << std::to_string(pos) << "\n";
+					          << pos << "\n";
 				}
 			} else {
 				std::cerr << name << " does not exist\n";
@@ -205,7 +202,7 @@ const char *strdeque_get_at(unsigned long id, size_t pos) {
 	
 	if (debug) {
 		std::cerr << __FUNCTION__ << "(" << returnName(id) << ", "
-		          << std::to_string(pos) << ")\n";
+		          << pos << ")\n";
 	}
     auto it = deques().find(id);
     
@@ -217,12 +214,11 @@ const char *strdeque_get_at(unsigned long id, size_t pos) {
 		} else {
 			if (it != deques().end()) {
 				if (pos < it->second.size()) {
-					std::cerr << name << ", element at "
-					          << std::to_string(pos) << " is \""
-					          << it->second[pos].c_str() << "\"\n";
+					std::cerr << name << ", element at " << pos << " is \""
+					          << it->second[pos] << "\"\n";
 				} else {
 					std::cerr << name << " does not contain element at "
-					          << std::to_string(pos) << "\n";
+					          << pos << "\n";
 				}
 			} else {
 				std::cerr << name << " does not exist\n";
@@ -311,7 +307,7 @@ int strdeque_comp(unsigned long id1, unsigned long id2) {
 				std::cerr << name2 << " does not exist\n";
 			} else {
 				std::cerr << "result of comparing " << name1 << " to "
-				          << name2 << " is " << std::to_string(result) << "\n";
+				          << name2 << " is " << result << "\n";
 			}
 		}
 	}
