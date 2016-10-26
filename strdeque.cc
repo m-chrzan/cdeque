@@ -43,7 +43,6 @@ namespace {
 }
 
 unsigned long strdeque_new() {
-	
     if (debug) {
         printEntryMessage(__FUNCTION__, "");
         std::cerr << __FUNCTION__ << ": deque " << nextId << " created\n";
@@ -56,31 +55,29 @@ unsigned long strdeque_new() {
 }
 
 void strdeque_delete(unsigned long id) {
-
     if (debug) {
         printEntryMessage(__FUNCTION__, returnName(id));
-    }    
-    
-    auto it = deques().find(id);
-    
-    if (debug) {
-		std::string name = returnName(id);
-		std::cerr << __FUNCTION__ << ": ";
-		if (id == 0) {
-			std::cerr << "attempt to remove " << name << "\n";
-		} else {
-			if (it != deques().end()) {
-				std::cerr << name << " deleted\n";
-			} else {
-				std::cerr << name << " does not exist\n";
-			}
-		}
     }
-    
+
+    auto it = deques().find(id);
+
+    if (debug) {
+        std::string name = returnName(id);
+        std::cerr << __FUNCTION__ << ": ";
+        if (id == 0) {
+            std::cerr << "attempt to remove " << name << "\n";
+        } else {
+            if (it != deques().end()) {
+                std::cerr << name << " deleted\n";
+            } else {
+                std::cerr << name << " does not exist\n";
+            }
+        }
+    }
+
     if (it != deques().end()) {
         deques().erase(it);
     }
-    
 }
 
 size_t strdeque_size(unsigned long id) {
@@ -91,14 +88,14 @@ size_t strdeque_size(unsigned long id) {
     }
 
     auto it = deques().find(id);
-    
+
     if (it != deques().end()) {
         size = it->second.size();
     }
-	
-	if (debug) {
-		std::string name = returnName(id);
-		std::cerr << __FUNCTION__ << ": ";
+
+    if (debug) {
+        std::string name = returnName(id);
+        std::cerr << __FUNCTION__ << ": ";
 
         if (it != deques().end()) {
             std::cerr << name << " contains " << size << " elements\n";
@@ -106,53 +103,53 @@ size_t strdeque_size(unsigned long id) {
             std::cerr << name << " does not exist\n";
         }
     }
-    
+
     return size;
 }
 
 void strdeque_insert_at(unsigned long id, size_t pos, const char *value) {
-	if (debug) {
-		std::cerr << __FUNCTION__ << "(" << returnName(id) << ", "
-		          << pos << ", ";
+    if (debug) {
+        std::cerr << __FUNCTION__ << "(" << returnName(id) << ", "
+                  << pos << ", ";
 
-		if (value == NULL) {
-			std::cerr << "NULL";
+        if (value == NULL) {
+            std::cerr << "NULL";
         } else {
-			std::cerr << "\"" << value << "\"";
+            std::cerr << "\"" << value << "\"";
         }
 
-		std::cerr << ")\n";
-	}
-	
-    auto it = deques().find(id);
-    
-    if (debug) {
-		std::string name = returnName(id);
-		std::cerr << __FUNCTION__ << ": ";
+        std::cerr << ")\n";
+    }
 
-		if (id == 0) {
-			std::cerr << "attempt to insert to " << name << "\n";
-		} else {
-			if (it != deques().end()) {
-				if (value == NULL) {
-					std::cerr << "attempt to insert NULL into a deque\n";
-				} else {
-					if (pos >= it->second.size()) {
-						std::cerr << name << ", element \""
-								  << value << "\" inserted at "
-								  << it->second.size() << "\n";
-					} else {
-						std::cerr << name << ", element \""
-								  << value << "\" inserted at "
-								  << pos << "\n";
-					}
-				}
-			} else {
-				std::cerr << name << " does not exist\n";
-			}
-		}
-	}
-	
+    auto it = deques().find(id);
+
+    if (debug) {
+        std::string name = returnName(id);
+        std::cerr << __FUNCTION__ << ": ";
+
+        if (id == 0) {
+            std::cerr << "attempt to insert to " << name << "\n";
+        } else {
+            if (it != deques().end()) {
+                if (value == NULL) {
+                    std::cerr << "attempt to insert NULL into a deque\n";
+                } else {
+                    if (pos >= it->second.size()) {
+                        std::cerr << name << ", element \""
+                                  << value << "\" inserted at "
+                                  << it->second.size() << "\n";
+                    } else {
+                        std::cerr << name << ", element \""
+                                  << value << "\" inserted at "
+                                  << pos << "\n";
+                    }
+                }
+            } else {
+                std::cerr << name << " does not exist\n";
+            }
+        }
+    }
+
     if (it != deques().end() && value != NULL) {
         std::string s = std::string(value);
 
@@ -165,67 +162,67 @@ void strdeque_insert_at(unsigned long id, size_t pos, const char *value) {
 }
 
 void strdeque_remove_at(unsigned long id, size_t pos) {
-	if (debug) {
-		std::cerr << __FUNCTION__ << "(" << returnName(id) << ", "
-		          << pos << ")\n";
-	}
-	
-	auto it = deques().find(id);
-	
-	if (debug) {
-		std::string name = returnName(id);
-		std::cerr << __FUNCTION__ << ": ";
-		if (id == 0) {
-			std::cerr << "attempt to remove from " << name << "\n";
-		} else {
-			if (it != deques().end()) {
-				if (pos < it->second.size()) {
-					std::cerr << name << ", element at " << pos << " removed\n";
-				} else {
-					std::cerr << name << " does not contain element at "
-					          << pos << "\n";
-				}
-			} else {
-				std::cerr << name << " does not exist\n";
-			}
-		}
-	}
-	
-	if (it != deques().end() && pos < it->second.size()) {
-		it->second.erase(it->second.begin() + pos);
-	}
-	
+    if (debug) {
+        std::cerr << __FUNCTION__ << "(" << returnName(id) << ", "
+                  << pos << ")\n";
+    }
+
+    auto it = deques().find(id);
+
+    if (debug) {
+        std::string name = returnName(id);
+        std::cerr << __FUNCTION__ << ": ";
+        if (id == 0) {
+            std::cerr << "attempt to remove from " << name << "\n";
+        } else {
+            if (it != deques().end()) {
+                if (pos < it->second.size()) {
+                    std::cerr << name << ", element at " << pos << " removed\n";
+                } else {
+                    std::cerr << name << " does not contain element at "
+                              << pos << "\n";
+                }
+            } else {
+                std::cerr << name << " does not exist\n";
+            }
+        }
+    }
+
+    if (it != deques().end() && pos < it->second.size()) {
+        it->second.erase(it->second.begin() + pos);
+    }
+
 }
 
 const char *strdeque_get_at(unsigned long id, size_t pos) {
-	if (debug) {
-		std::cerr << __FUNCTION__ << "(" << returnName(id) << ", "
-		          << pos << ")\n";
-	}
+    if (debug) {
+        std::cerr << __FUNCTION__ << "(" << returnName(id) << ", "
+                  << pos << ")\n";
+    }
 
     auto it = deques().find(id);
-    
-    if (debug) {
-		std::string name = returnName(id);
-		std::cerr << __FUNCTION__ << ": ";
 
-		if (id == 0) {
-			std::cerr << "attempt to get from " << name << "\n";
-		} else {
-			if (it != deques().end()) {
-				if (pos < it->second.size()) {
-					std::cerr << name << ", element at " << pos << " is \""
-					          << it->second[pos] << "\"\n";
-				} else {
-					std::cerr << name << " does not contain element at "
-					          << pos << "\n";
-				}
-			} else {
-				std::cerr << name << " does not exist\n";
-			}
-		}
-	}
-	
+    if (debug) {
+        std::string name = returnName(id);
+        std::cerr << __FUNCTION__ << ": ";
+
+        if (id == 0) {
+            std::cerr << "attempt to get from " << name << "\n";
+        } else {
+            if (it != deques().end()) {
+                if (pos < it->second.size()) {
+                    std::cerr << name << ", element at " << pos << " is \""
+                              << it->second[pos] << "\"\n";
+                } else {
+                    std::cerr << name << " does not contain element at "
+                              << pos << "\n";
+                }
+            } else {
+                std::cerr << name << " does not exist\n";
+            }
+        }
+    }
+
     if (it != deques().end() && pos < it->second.size()) {
         return it->second[pos].c_str();
     }
@@ -235,40 +232,40 @@ const char *strdeque_get_at(unsigned long id, size_t pos) {
 
 void strdeque_clear(unsigned long id) {
     std::string name = returnName(id);
-    
+
     if (debug) {
         printEntryMessage(__FUNCTION__, name);
     }
-        
+
     auto it = deques().find(id);
-    
+
     if (debug) {
-		std::cerr << __FUNCTION__ << ": ";
+        std::cerr << __FUNCTION__ << ": ";
         if (id == 0) {
-			std::cerr << "attempt to clear " << name << "\n";
-		} else {
-			if (it != deques().end()) {
-				std::cerr << name << " cleared\n";
-			} else {
-				std::cerr << name << " does not exist\n";
-			}
-		}
+            std::cerr << "attempt to clear " << name << "\n";
+        } else {
+            if (it != deques().end()) {
+                std::cerr << name << " cleared\n";
+            } else {
+                std::cerr << name << " does not exist\n";
+            }
+        }
     }
-    
+
     if (it != deques().end()) {
         it->second.clear();
     }
 }
 
 int strdeque_comp(unsigned long id1, unsigned long id2) {
-	if (debug) {
-		std::cerr << __FUNCTION__ << "(" << returnName(id1) << ", "
-		          << returnName(id2) << ")\n";
-	}
+    if (debug) {
+        std::cerr << __FUNCTION__ << "(" << returnName(id1) << ", "
+                  << returnName(id2) << ")\n";
+    }
 
     auto it1 = deques().find(id1);
     auto it2 = deques().find(id2);
-	
+
     dequeString deque1;
     dequeString deque2;
 
@@ -284,8 +281,8 @@ int strdeque_comp(unsigned long id1, unsigned long id2) {
         deque2 = it2->second;
     }
 
-	int result = 0;
-	
+    int result = 0;
+
     if (deque1 < deque2) {
         result = -1;
     } else if (deque1 == deque2) {
@@ -293,22 +290,22 @@ int strdeque_comp(unsigned long id1, unsigned long id2) {
     } else {
         result = 1;
     }
-    
+
     if (debug) {
-		std::cerr << __FUNCTION__ << ": ";
-		std::string name1 = returnName(id1);
-		std::string name2 = returnName(id2);
-		if (it1 == deques().end()) {
-			std::cerr << name1 << " does not exist\n";
-		} else {
-			if (it2 == deques().end()) {
-				std::cerr << name2 << " does not exist\n";
-			} else {
-				std::cerr << "result of comparing " << name1 << " to "
-				          << name2 << " is " << result << "\n";
-			}
-		}
-	}
-	
-	return result;
+        std::cerr << __FUNCTION__ << ": ";
+        std::string name1 = returnName(id1);
+        std::string name2 = returnName(id2);
+        if (it1 == deques().end()) {
+            std::cerr << name1 << " does not exist\n";
+        } else {
+            if (it2 == deques().end()) {
+                std::cerr << name2 << " does not exist\n";
+            } else {
+                std::cerr << "result of comparing " << name1 << " to "
+                          << name2 << " is " << result << "\n";
+            }
+        }
+    }
+
+    return result;
 }
