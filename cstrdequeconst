@@ -4,9 +4,7 @@
 #include <iostream>
 
 namespace jnp1 {
-    extern "C" {
-        unsigned long emptystrdeque();
-    }
+#include "strdequeconst.h"
 }
 
 #endif
