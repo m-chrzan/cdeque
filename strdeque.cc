@@ -38,7 +38,8 @@ namespace {
         return name;
     }
 
-    void printEntryMessage(const std::string &funcName, const std::string &dequeName) {
+    void printEntryMessage(const std::string &funcName,
+                           const std::string &dequeName) {
         std::cerr << funcName << "(" << dequeName << ")\n";
     }
 }
